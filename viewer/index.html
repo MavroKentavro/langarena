@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tokens Viewer</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: #121a27;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.62);
+      --border: rgba(255,255,255,.10);
+      --chip: rgba(255,255,255,.06);
+      --good: #3ddc97;
+      --bad: #ff5c7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(122,92,255,.18), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(61,220,151,.14), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 20px 18px 8px;
+      position: sticky; top: 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,23,.85), rgba(11,15,23,.35));
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    h1 { font-size: 16px; margin: 0 10px 0 0; letter-spacing: .2px; }
+    .pill {
+      font-size: 12px; padding: 6px 10px; border: 1px solid var(--border);
+      background: rgba(255,255,255,.04); border-radius: 999px; color: var(--muted);
+    }
+    input, select {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      outline: none;
+      min-width: 220px;
+    }
+    input::placeholder { color: rgba(255,255,255,.45); }
+    main { padding: 14px 18px 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+    .card {
+      grid-column: span 12;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .card h2 {
+      margin: 0;
+      padding: 12px 14px;
+      font-size: 13px;
+      letter-spacing: .2px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .body { padding: 12px 14px 14px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      display: grid;
+      grid-template-columns: 1.3fr 1.2fr 0.8fr;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+    }
+    .k { font-size: 12px; color: var(--muted); word-break: break-word; }
+    .v { font-size: 13px; word-break: break-word; }
+    .meta { display: flex; justify-content: flex-end; gap: 8px; align-items: center; }
+    .chip {
+      font-size: 11px; padding: 4px 8px; border-radius: 999px;
+      background: var(--chip); border: 1px solid var(--border); color: var(--muted);
+      white-space: nowrap;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+    .swatch {
+      width: 40px; height: 40px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    }
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .previewBox {
+      height: 52px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    pre {
+      margin: 0;
+      padding: 12px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: auto;
+      max-height: 520px;
+      color: rgba(255,255,255,.86);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .ok { color: var(--good); }
+    .bad { color: var(--bad); }
+    @media (min-width: 980px) {
+      .card.colors { grid-column: span 6; }
+      .card.typo { grid-column: span 6; }
+      .card.space { grid-column: span 6; }
+      .card.radius { grid-column: span 6; }
+      .card.shadows { grid-column: span 6; }
+      .card.raw { grid-column: span 6; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="row">
+    <h1>Tokens Viewer</h1>
+    <span class="pill" id="filePill">tokens.json</span>
+    <span class="pill" id="countPill">—</span>
+  </div>
+  <div class="row" style="margin-top:10px;">
+    <input id="q" placeholder="Search token: color.primary / font.size / spacing…" />
+    <select id="mode">
+      <option value="all">All</option>
+      <option value="color">Color</option>
+      <option value="typography">Typography</option>
+      <option value="spacing">Spacing</option>
+      <option value="radius">Radius</option>
+      <option value="shadow">Shadow</option>
+      <option value="other">Other</option>
+    </select>
+    <select id="source">
+      <option value="tokens.json">tokens.json</option>
+      <option value="variables.json">variables.json</option>
+      <option value="export.json">export.json</option>
+    </select>
+
+    <label class="pill" style="display:inline-flex; gap:8px; align-items:center; cursor:pointer;">
+      <input id="fileInput" type="file" accept="application/json" style="display:none" />
+      Open JSON…
+    </label>
+    <span class="pill" id="statusPill">Loading…</span>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <section class="card colors">
+      <h2>Colors <span class="chip" id="colorsCount">—</span></h2>
+      <div class="body"><div class="list" id="colors"></div></div>
+    </section>
+
+    <section class="card typo">
+      <h2>Typography <span class="chip" id="typoCount">—</span></h2>
+      <div class="body"><div class="list" id="typo"></div></div>
+    </section>
+
+    <section class="card space">
+      <h2>Spacing <span class="chip" id="spaceCount">—</span></h2>
+      <div class="body"><div class="list" id="space"></div></div>
+    </section>
+
+    <section class="card radius">
+      <h2>Radius <span class="chip" id="radiusCount">—</span></h2>
+      <div class="body"><div class="list" id="radius"></div></div>
+    </section>
+
+    <section class="card shadows">
+      <h2>Shadows <span class="chip" id="shadowCount">—</span></h2>
+      <div class="body"><div class="list" id="shadows"></div></div>
+    </section>
+
+    <section class="card raw">
+      <h2>Raw JSON <span class="chip" id="rawHint">readonly</span></h2>
+      <div class="body"><pre id="raw"></pre></div>
+    </section>
+  </div>
+</main>
+
+<script>
+  const els = {
+    q: document.querySelector("#q"),
+    mode: document.querySelector("#mode"),
+    source: document.querySelector("#source"),
+    fileInput: document.querySelector("#fileInput"),
+    status: document.querySelector("#statusPill"),
+    filePill: document.querySelector("#filePill"),
+    countPill: document.querySelector("#countPill"),
+    colors: document.querySelector("#colors"),
+    typo: document.querySelector("#typo"),
+    space: document.querySelector("#space"),
+    radius: document.querySelector("#radius"),
+    shadows: document.querySelector("#shadows"),
+    raw: document.querySelector("#raw"),
+    colorsCount: document.querySelector("#colorsCount"),
+    typoCount: document.querySelector("#typoCount"),
+    spaceCount: document.querySelector("#spaceCount"),
+    radiusCount: document.querySelector("#radiusCount"),
+    shadowCount: document.querySelector("#shadowCount"),
+  };
+
+  let TOKENS = [];   // flat list {key, value, type, meta}
+  let RAW = null;
+
+  function isColor(v) {
+    if (typeof v !== "string") return false;
+    const s = v.trim();
+    return /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(s) ||
+      /^rgba?\(/i.test(s) || /^hsla?\(/i.test(s);
+  }
+
+  function normalizeType(key, value) {
+    const k = key.toLowerCase();
+    if (isColor(value) || k.includes("color") || k.includes("bg") || k.includes("foreground")) return "color";
+    if (k.includes("font") || k.includes("typography") || k.includes("text") || (typeof value === "object" && value && ("fontSize" in value || "lineHeight" in value))) return "typography";
+    if (k.includes("space") || k.includes("spacing") || k.includes("gap") || k.includes("padding") || k.includes("margin")) return "spacing";
+    if (k.includes("radius") || k.includes("corner")) return "radius";
+    if (k.includes("shadow") || (typeof value === "object" && value && ("blur" in value || "spread" in value))) return "shadow";
+    return "other";
+  }
+
+  function flatten(obj, prefix = "") {
+    const out = [];
+    const isPlain = (x) => x && typeof x === "object" && !Array.isArray(x);
+    for (const [k, v] of Object.entries(obj || {})) {
+      const path = prefix ? `${prefix}.${k}` : k;
+      if (isPlain(v)) {
+        // if looks like a "leaf token object", keep it
+        const leafLike = ("value" in v) || ("$value" in v) || ("type" in v) || ("$type" in v);
+        if (leafLike) out.push({ key: path, value: v.value ?? v.$value ?? v, meta: v });
+        else out.push(...flatten(v, path));
+      } else {
+        out.push({ key: path, value: v, meta: null });
+      }
+    }
+    return out;
+  }
+
+  function parseFigmaVariablesJSON(json) {
+    // Supports multiple common shapes:
+    // 1) Style Dictionary: { tokens: { ... } } OR plain { ... }
+    // 2) Figma Variables export: has "collections", "variables", etc. (we'll best-effort map)
+    RAW = json;
+
+    // Style Dictionary-ish
+    const root = json.tokens ?? json;
+    let flat = flatten(root);
+
+    // Figma variables export fallback (best-effort)
+    if ((json.variables && typeof json.variables === "object") || json.collections) {
+      const vars = json.variables || {};
+      const vlist = [];
+      for (const [id, v] of Object.entries(vars)) {
+        const name = v.name || id;
+        const value = v.valuesByMode ? v.valuesByMode[Object.keys(v.valuesByMode)[0]] : (v.value ?? v.resolvedValue ?? v);
+        vlist.push({ key: name.replace(/\//g, "."), value, meta: v });
+      }
+      if (vlist.length) flat = vlist;
+    }
+
+    TOKENS = flat.map(t => {
+      const type = normalizeType(t.key, t.value);
+      return { ...t, type };
+    });
+  }
+
+  function fmt(v) {
+    if (typeof v === "string") return v;
+    if (typeof v === "number") return String(v);
+    try { return JSON.stringify(v); } catch { return String(v); }
+  }
+
+  function filterTokens() {
+    const q = els.q.value.trim().toLowerCase();
+    const mode = els.mode.value;
+    return TOKENS.filter(t => {
+      if (mode !== "all" && t.type !== mode) return false;
+      if (!q) return true;
+      return t.key.toLowerCase().includes(q) || fmt(t.value).toLowerCase().includes(q);
+    });
+  }
+
+  function tokenRow(t, extraLeftNode) {
+    const div = document.createElement("div");
+    div.className = "item";
+
+    const k = document.createElement("div");
+    k.className = "k";
+    k.textContent = t.key;
+
+    const v = document.createElement("div");
+    v.className = "v";
+    v.textContent = fmt(t.value);
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = t.type;
+    meta.appendChild(chip);
+
+    if (extraLeftNode) {
+      k.prepend(extraLeftNode);
+      k.style.display = "flex";
+      k.style.alignItems = "center";
+      k.style.gap = "10px";
+    }
+
+    div.appendChild(k);
+    div.appendChild(v);
+    div.appendChild(meta);
+    return div;
+  }
+
+  function render() {
+    const list = filterTokens();
+
+    const colors = list.filter(t => t.type === "color");
+    const typo = list.filter(t => t.type === "typography");
+    const space = list.filter(t => t.type === "spacing");
+    const radius = list.filter(t => t.type === "radius");
+    const shadows = list.filter(t => t.type === "shadow");
+
+    els.countPill.textContent = `${list.length} shown / ${TOKENS.length} total`;
+
+    els.colors.innerHTML = "";
+    els.typo.innerHTML = "";
+    els.space.innerHTML = "";
+    els.radius.innerHTML = "";
+    els.shadows.innerHTML = "";
+
+    els.colorsCount.textContent = colors.length;
+    els.typoCount.textContent = typo.length;
+    els.spaceCount.textContent = space.length;
+    els.radiusCount.textContent = radius.length;
+    els.shadowCount.textContent = shadows.length;
+
+    // Colors
+    for (const t of colors.slice(0, 400)) {
+      const sw = document.createElement("div");
+      sw.className = "swatch";
+      const val = fmt(t.value);
+      if (isColor(val)) {
+        sw.style.background = val;
+      } else {
+        sw.style.background = "repeating-linear-gradient(45deg, rgba(255,255,255,.12), rgba(255,255,255,.12) 8px, rgba(0,0,0,.18) 8px, rgba(0,0,0,.18) 16px)";
+      }
+      els.colors.appendChild(tokenRow(t, sw));
+    }
+
+    // Typography
+    for (const t of typo.slice(0, 300)) {
+      const box = document.createElement("div");
+      box.className = "previewBox";
+
+      const v = t.value;
+      const sample = document.createElement("div");
+      sample.textContent = "Aa Bb Сс 123 — sample";
+      sample.style.maxWidth = "100%";
+      sample.style.overflow = "hidden";
+      sample.style.textOverflow = "ellipsis";
+      sample.style.whiteSpace = "nowrap";
+
+      // Support object values like {fontSize, lineHeight, fontFamily, fontWeight}
+      if (v && typeof v === "object") {
+        const fs = v.fontSize ?? v.size ?? v["font-size"];
+        const lh = v.lineHeight ?? v.height ?? v["line-height"];
+        const ff = v.fontFamily ?? v.family ?? v["font-family"];
+        const fw = v.fontWeight ?? v.weight ?? v["font-weight"];
+        if (fs) sample.style.fontSize = typeof fs === "number" ? `${fs}px` : `${fs}`;
+        if (lh) sample.style.lineHeight = typeof lh === "number" ? `${lh}px` : `${lh}`;
+        if (ff) sample.style.fontFamily = ff;
+        if (fw) sample.style.fontWeight = fw;
+      }
+      box.innerHTML = "";
+      box.appendChild(sample);
+
+      els.typo.appendChild(tokenRow(t, box));
+    }
+
+    // Spacing
+    for (const t of space.slice(0, 300)) {
+      const box = document.createElement("div");
+      box.className = "previewBox";
+
+      const n = (typeof t.value === "number") ? t.value : parseFloat(String(t.value).replace("px",""));
+      if (!Number.isNaN(n)) {
+        box.style.height = "52px";
+        box.style.display = "flex";
+        box.style.justifyContent = "flex-start";
+        box.style.padding = "10px";
+        const bar = document.createElement("div");
+        bar.style.width = `${Math.max(1, Math.min(240, n))}px`;
+        bar.style.height = "12px";
+        bar.style.borderRadius = "999px";
+        bar.style.background = "rgba(255,255,255,.22)";
+        box.textContent = "";
+        box.appendChild(bar);
+      } else {
+        box.textContent = "preview n/a";
+      }
+
+      els.space.appendChild(tokenRow(t, box));
+    }
+
+    // Radius
+    for (const t of radius.slice(0, 300)) {
+      const box = document.createElement("div");
+      box.className = "previewBox";
+      const n = (typeof t.value === "number") ? t.value : parseFloat(String(t.value).replace("px",""));
+      const demo = document.createElement("div");
+      demo.style.width = "60px";
+      demo.style.height = "28px";
+      demo.style.border = "1px solid rgba(255,255,255,.18)";
+      demo.style.background = "rgba(255,255,255,.06)";
+      demo.style.borderRadius = Number.isNaN(n) ? "10px" : `${n}px`;
+      box.textContent = "";
+      box.appendChild(demo);
+      els.radius.appendChild(tokenRow(t, box));
+    }
+
+    // Shadows
+    for (const t of shadows.slice(0, 250)) {
+      const box = document.createElement("div");
+      box.className = "previewBox";
+      box.style.justifyContent = "center";
+
+      const card = document.createElement("div");
+      card.style.width = "90px";
+      card.style.height = "34px";
+      card.style.borderRadius = "14px";
+      card.style.border = "1px solid rgba(255,255,255,.16)";
+      card.style.background = "rgba(255,255,255,.06)";
+
+      const val = t.value;
+      // If already a CSS box-shadow string
+      if (typeof val === "string" && val.toLowerCase().includes("px")) {
+        card.style.boxShadow = val;
+      } else if (val && typeof val === "object") {
+        const x = val.x ?? 0, y = val.y ?? 6, blur = val.blur ?? 18, spread = val.spread ?? 0;
+        const c = val.color ?? "rgba(0,0,0,.35)";
+        card.style.boxShadow = `${x}px ${y}px ${blur}px ${spread}px ${c}`;
+      } else {
+        card.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
+      }
+
+      box.textContent = "";
+      box.appendChild(card);
+      els.shadows.appendChild(tokenRow(t, box));
+    }
+
+    // Raw JSON
+    try {
+      els.raw.textContent = JSON.stringify(RAW, null, 2);
+    } catch {
+      els.raw.textContent = String(RAW);
+    }
+
+    els.status.textContent = "Ready ✅";
+  }
+
+  
+  function coerceJSON(x) {
+    // Handle double-encoded JSON: top-level string that contains JSON text
+    if (typeof x === "string") {
+      const s = x.trim();
+      if ((s.startsWith("{") && s.endsWith("}")) || (s.startsWith("[") && s.endsWith("]"))) {
+        try { return JSON.parse(s); } catch { /* fallthrough */ }
+      }
+      return x;
+    }
+    return x;
+  }
+
+  async function load(file) {
+    els.status.textContent = "Loading…";
+    els.filePill.textContent = file;
+
+    // If opened via file://, fetch is often blocked. We'll still try, but show a useful hint.
+    if (location.protocol === "file:") {
+      els.status.textContent = "Hint: open via http:// (local server) or use Open JSON…";
+    }
+
+    const res = await fetch(file, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+
+    // Read as text first to tolerate BOM and odd encodings
+    const text = await res.text();
+    const cleaned = text.replace(/^\uFEFF/, ""); // strip BOM if present
+    let json;
+    try {
+      json = JSON.parse(cleaned);
+    } catch (e) {
+      throw new Error("JSON parse error. Возможно файл не JSON или он экспортирован как строка. Используй Open JSON… или проверь формат.");
+    }
+    json = coerceJSON(json);
+
+    parseFigmaVariablesJSON(json);
+    render();
+  }
+
+  async function loadFromLocalFile(fileObj) {
+    els.status.textContent = "Loading…";
+    els.filePill.textContent = fileObj.name;
+
+    const text = await fileObj.text();
+    const cleaned = text.replace(/^\uFEFF/, "");
+    let json = JSON.parse(cleaned);
+    json = coerceJSON(json);
+
+    parseFigmaVariablesJSON(json);
+    render();
+  }
+
+
+  
+  function bind() {
+    const rerender = () => render();
+    els.q.addEventListener("input", rerender);
+    els.mode.addEventListener("change", rerender);
+    els.source.addEventListener("change", () => load(els.source.value).catch(err => {
+      els.status.textContent = "Error ❌";
+      els.raw.textContent = String(err);
+    }));
+
+    // Local file picker (works even without a local server)
+    els.fileInput.addEventListener("change", async (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      try {
+        await loadFromLocalFile(f);
+      } catch (err) {
+        els.status.textContent = "Error ❌";
+        els.raw.textContent = String(err);
+      }
+    });
+
+    // Drag & drop
+    window.addEventListener("dragover", (e) => { e.preventDefault(); });
+    window.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (!f) return;
+      try {
+        await loadFromLocalFile(f);
+      } catch (err) {
+        els.status.textContent = "Error ❌";
+        els.raw.textContent = String(err);
+      }
+    });
+  }
+
+
+  bind();
+  load(els.source.value).catch(err => {
+    els.status.textContent = "Error ❌";
+    els.raw.textContent = String(err);
+  });
+</script>
+</body>
+</html>
