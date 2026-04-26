@@ -1,0 +1,47 @@
+.title {
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+}
+
+.row {
+  background: var(--color-ring-inverse);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-medium);
+  padding: var(--space-24);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.row:hover {
+  background: var(--color-background-secondary);
+}
+
+.rowSuccess {
+  color: var(--color-text-success);
+}
+
+.rowDanger {
+  color: var(--color-text-danger);
+}
+
+.rowIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.rowLabel {
+  flex: 1;
+  text-align: center;
+}

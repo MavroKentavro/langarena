@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This file intentionally contains no illustration.
+
+  The "Language learning exercises your brain" screen uses a specific
+  brain-in-lightbulb photo supplied by the user. That asset has not
+  yet been saved to /preview/images/brain-bulb.png, so the screen
+  shows this empty stub with a 1px dashed outline so the missing
+  asset is visible during review.
+
+  As soon as `brain-bulb.png` is dropped into this folder, the <img
+  onerror> fallback in the prototype will switch back to the PNG
+  automatically — no code changes required.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" role="img" aria-label="Image asset missing — drop brain-bulb.png into preview/images/">
+  <title>Image asset missing</title>
+  <rect x="0.5" y="0.5" width="279" height="279" rx="20" ry="20"
+        fill="none" stroke="#c8d0e0" stroke-width="1" stroke-dasharray="6 6"/>
+  <g font-family="-apple-system, system-ui, sans-serif" fill="#8695aa" text-anchor="middle">
+    <text x="140" y="132" font-size="13" font-weight="600">Image not yet provided</text>
+    <text x="140" y="154" font-size="11">Save brain-bulb.png to preview/images/</text>
+  </g>
+</svg>

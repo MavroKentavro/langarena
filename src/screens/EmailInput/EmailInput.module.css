@@ -1,0 +1,19 @@
+.title {
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  text-align: center;
+  width: 100%;
+}
+
+.error {
+  color: var(--color-text-danger);
+}
+
+.field {
+  width: 100%;
+}

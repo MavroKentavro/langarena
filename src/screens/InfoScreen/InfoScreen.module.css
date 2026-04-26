@@ -1,0 +1,49 @@
+/*
+ * InfoScreen — reusable layout for marketing/onboarding screens that
+ * show a short message and advance via a single CTA.
+ * Matches the Figma marketing-frame pattern (title + supporting
+ * illustration + optional body + CTA).
+ */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+.title {
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+}
+
+.body {
+  color: var(--color-text-secondary);
+  text-align: center;
+  width: 100%;
+}
+
+.visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualPlaceholder {
+  width: 260px;
+  height: 260px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    135deg,
+    var(--color-background-secondary),
+    var(--color-ring-brand)
+  );
+  border: 1px solid var(--color-border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-brand);
+  box-shadow: var(--elevation-100);
+}

@@ -1,0 +1,433 @@
+/*
+ * Paywall — Figma frame "Paywall" (3602 tall).
+ * Ordered per the extracted structure:
+ *   hero → plan cards → guarantee link → CTA → security → renewal →
+ *   payment methods → score projection → trusted by universities →
+ *   feature list → how it works cards → money-back → comparison →
+ *   plan cards + CTA (repeated).
+ *
+ * The entire page scrolls within the viewport; CTA container is
+ * NOT sticky here (Figma uses repeated CTAs at the top & bottom).
+ */
+.page {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-canvas);
+  padding-bottom: var(--space-48);
+  width: 100%;
+  flex: 1;
+}
+
+.paywallHeader {
+  padding: var(--space-24) var(--space-16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.paywallLogo {
+  color: var(--color-text-primary);
+  height: 24px;
+  width: 129px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 50%;
+  right: var(--space-16);
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  background: transparent;
+  transition: background-color 120ms ease;
+}
+
+.closeButton:hover {
+  background: var(--color-background-tertiary);
+}
+
+.hero {
+  text-align: center;
+  color: var(--color-text-primary);
+  padding: var(--space-32) var(--space-16) var(--space-24);
+}
+
+.section {
+  padding: 0 var(--space-16);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-16);
+  width: 100%;
+}
+
+.sectionHeading {
+  color: var(--color-text-primary);
+  margin-top: var(--space-32);
+  margin-bottom: var(--space-16);
+  text-align: center;
+}
+
+/* ---------- Plan cards ---------- */
+.planStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.plan {
+  background: var(--color-ring-inverse);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-medium);
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.plan:hover {
+  box-shadow: var(--elevation-100);
+}
+
+.plan.selected {
+  border: 1px solid var(--color-border-brand);
+  padding: 0 0 var(--space-16) 0;
+  overflow: hidden;
+}
+
+.planPopular {
+  background: var(--color-background-brand);
+  color: var(--color-text-on-accent);
+  padding: var(--space-4) var(--space-16);
+  text-align: center;
+}
+
+.planBody {
+  padding: 0 var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.plan:not(.selected) .planBody {
+  padding: 0;
+}
+
+.planRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.planName {
+  color: var(--color-text-primary);
+}
+
+.planOldPrice {
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+}
+
+.savePill {
+  background: var(--color-ring-brand);
+  color: var(--color-text-brand);
+  border-radius: 12px;
+  padding: var(--space-4) var(--space-8);
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  color: var(--color-text-primary);
+}
+
+.planPriceInt {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+}
+
+.planPriceFrac {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: var(--font-weight-bold);
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.planPerDay {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Guarantee link & CTA stack ---------- */
+.guaranteeLink {
+  display: inline-flex;
+  align-self: center;
+  color: var(--color-text-brand);
+  text-decoration: underline;
+  margin-top: var(--space-20);
+  margin-bottom: var(--space-20);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.ctaBlock {
+  padding: 0 var(--space-16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.secureRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  color: var(--color-text-secondary);
+}
+
+.renewalText {
+  color: var(--color-text-secondary);
+  text-align: center;
+  max-width: 343px;
+}
+
+/* ---------- Payment methods ---------- */
+.paymentRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-8);
+  margin-top: var(--space-24);
+  flex-wrap: wrap;
+}
+
+.paymentPill {
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--radius-xxs);
+  padding: var(--space-8) var(--space-12);
+  color: var(--color-text-primary);
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ---------- Score projection chart ---------- */
+.scoreCard {
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-large);
+  padding: var(--space-20);
+  box-shadow: var(--elevation-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.scoreHeader {
+  color: var(--color-text-secondary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.scoreBody {
+  color: var(--color-text-primary);
+}
+
+.scoreReadiness {
+  color: var(--color-text-brand);
+}
+
+.scoreChart {
+  width: 100%;
+  height: 160px;
+  background: var(--color-background-secondary);
+  border-radius: var(--radius-small);
+  position: relative;
+  overflow: hidden;
+}
+
+.scoreChart::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 30%;
+  height: 2px;
+  background: var(--color-text-brand);
+  opacity: 0.3;
+  border-top: 2px dashed var(--color-text-brand);
+  opacity: 0.8;
+  background: none;
+}
+
+.scoreLegend {
+  display: flex;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+  color: var(--color-text-secondary);
+}
+
+.scoreLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.scoreLegendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ---------- University slider ---------- */
+.trustSlider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-8);
+}
+
+.trustCard {
+  height: 64px;
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  text-align: center;
+  padding: var(--space-8);
+}
+
+/* ---------- Feature checklist ---------- */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.featureIcon {
+  color: var(--color-text-success);
+  flex-shrink: 0;
+}
+
+.featureLabel {
+  color: var(--color-text-primary);
+}
+
+/* ---------- How it works cards ---------- */
+.howItWorks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.howCard {
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-medium);
+  padding: var(--space-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  box-shadow: var(--elevation-100);
+}
+
+.howCard img {
+  width: 100%;
+  height: 140px;
+  border-radius: var(--radius-small);
+  background: linear-gradient(
+    135deg,
+    var(--color-background-secondary),
+    var(--color-ring-brand)
+  );
+}
+
+.howCardTitle {
+  color: var(--color-text-primary);
+}
+
+.howCardBody {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Money-back block ---------- */
+.moneyBack {
+  background: var(--color-background-secondary);
+  border-radius: var(--radius-large);
+  padding: var(--space-24);
+  text-align: center;
+  color: var(--color-text-primary);
+  box-shadow: var(--elevation-100);
+}
+
+/* ---------- Comparison table ---------- */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  background: var(--color-background-primary);
+}
+
+.compCol {
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.compColBrand {
+  background: var(--color-ring-brand);
+  color: var(--color-text-primary);
+}
+
+.compColHeader {
+  color: var(--color-text-primary);
+}
+
+.compColHeaderBrand {
+  color: var(--color-text-brand);
+}
+
+.compRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  color: var(--color-text-primary);
+}
+
+.compRow.negative {
+  color: var(--color-text-secondary);
+}
+
+.compRow svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}

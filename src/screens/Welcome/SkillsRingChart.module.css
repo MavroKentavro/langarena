@@ -1,0 +1,25 @@
+/*
+ * Skills ring chart — 214×214 SVG composition used on the
+ * "Get ready for TOEFL" screen. The wrapper enforces the design
+ * dimensions; the svg fills the wrapper.
+ */
+.chartWrapper {
+  width: 214px;
+  height: 214px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart circle {
+    transition: none !important;
+  }
+}

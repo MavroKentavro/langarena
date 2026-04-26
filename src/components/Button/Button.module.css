@@ -1,0 +1,67 @@
+/*
+ * Primary button — matches Figma "Button primary" component:
+ * 56px tall, radius medium (20), background brand, text on-accent,
+ * semibold 16 / line-height 24, horizontal padding 24, full-width inside
+ * a 16px-padded container (i.e. 342px wide on a 375 canvas).
+ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  height: 56px;
+  padding: var(--space-16) var(--space-24);
+  border-radius: var(--radius-medium);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xl);
+  letter-spacing: 0;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease,
+    transform 100ms ease;
+  width: 100%;
+  /*
+   * CTA stays at 343 (375 − 2×16 horizontal padding) on every
+   * screen and every viewport, even when the underlying layout is
+   * allowed to grow (language-select on ≥425). The design spec
+   * requires the CTA to remain inside the baseline 375 container.
+   */
+  max-width: 343px;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.button:disabled {
+  background: var(--color-background-disabled);
+  color: var(--color-text-disabled);
+  box-shadow: none;
+}
+
+/* Variants */
+.variant-primary {
+  background: var(--color-background-brand);
+  color: var(--color-text-on-accent);
+}
+
+.variant-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-background-brand) 92%, black);
+}
+
+.variant-secondary {
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+}
+
+.variant-ghost {
+  background: var(--color-background-ghost);
+  color: var(--color-text-brand);
+}
+
+.variant-ghost:hover:not(:disabled) {
+  background: var(--color-ring-brand);
+}

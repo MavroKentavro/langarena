@@ -1,0 +1,50 @@
+@import "./tokens.css";
+@import "./reset.css";
+@import "./typography.css";
+
+/*
+ * App shell — centers the funnel viewport on the page.
+ *
+ * Global layout is a fixed mobile composition: the viewport is 375 wide
+ * and that width applies to *every* screen.
+ *
+ * Only the language-select screen breaks out of that baseline: it has
+ * its own breakpoints (375 / 425 / 768) implemented in its own module
+ * CSS. The shell itself stays 375.
+ */
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: var(--color-background-canvas);
+}
+
+.app-shell__viewport {
+  width: 100%;
+  max-width: 375px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--color-background-canvas);
+}
+
+/*
+ * When the language-select screen is active, let the viewport expand
+ * so the 4-column card grid can breathe on tablet-size viewports.
+ * Selector relies on a data attribute set by FunnelRouter.
+ */
+.app-shell[data-active-step="language"] .app-shell__viewport {
+  max-width: 375px;
+}
+@media (min-width: 425px) {
+  .app-shell[data-active-step="language"] .app-shell__viewport {
+    max-width: 425px;
+  }
+}
+@media (min-width: 768px) {
+  .app-shell[data-active-step="language"] .app-shell__viewport {
+    max-width: 768px;
+  }
+}

@@ -1,0 +1,73 @@
+/*
+ * "Get ready for TOEFL" screen (Figma: 6002:1812).
+ * Stacks: title + subtitle, "3 minute quiz" badge, animated 4-ring
+ * skills chart, labeled legend dots, bottom-fixed Next CTA (via
+ * ScreenShell).
+ */
+.heading {
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  padding: 0 var(--space-12);
+  width: 100%;
+}
+
+/*
+ * Legend — four skill labels under the chart.
+ * Items fade + slide in from the left, one after another, mirroring
+ * the chart's outer-to-inner reveal. Per-item delay is set inline
+ * from the component so the sequence reads left → right.
+ */
+.legend {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.legendItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: legendFadeInLeft 500ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legendLabel {
+  color: var(--color-text-primary);
+}
+
+@keyframes legendFadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legendItem {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

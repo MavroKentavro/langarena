@@ -1,0 +1,148 @@
+/*
+ * "What's your native language?" screen.
+ *
+ * This is the ONLY screen in the funnel that adapts to wider
+ * viewports. All other screens stay at the baseline 375 layout.
+ *
+ * Breakpoints:
+ *   - default (<425) — 2-column grid, content ≤ 343
+ *   - ≥425           — 2-column grid, content ≤ 393
+ *   - ≥768           — 4-column grid, content ≤ 720
+ *
+ * The CTA stays inside the 375 container (max-width 343) regardless
+ * of viewport — see components/Button/Button.module.css.
+ */
+
+.title {
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+}
+
+/*
+ * Override ScreenShell's 343 content cap so the grid can breathe on
+ * larger viewports. Applied through the parent selector trick so we
+ * don't need to touch ScreenShell.
+ */
+.screen :global(.contentInner) {
+  max-width: 343px;
+}
+@media (min-width: 425px) {
+  .screen :global(.contentInner) {
+    max-width: 393px;
+  }
+}
+@media (min-width: 768px) {
+  .screen :global(.contentInner) {
+    max-width: 720px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-16);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/*
+ * Card — flag slot on top, label below. Default: surface bg, 1px
+ * border. Selected: 2px brand border + tinted brand bg + check_circle
+ * icon pinned to the top-right corner.
+ */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-16) var(--space-12);
+  border-radius: var(--radius-medium);
+  background: var(--color-ring-inverse);
+  border: 1px solid var(--color-border-primary);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+  outline: none;
+}
+
+.card:hover:not(.cardSelected) {
+  background: color-mix(
+    in srgb,
+    var(--color-ring-inverse) 92%,
+    var(--color-background-brand)
+  );
+}
+
+.card:active {
+  transform: scale(0.985);
+}
+
+.cardSelected {
+  background: var(--color-ring-brand);
+  border: 2px solid var(--color-border-brand);
+  /* Shave 1px so the 2px border doesn't resize the card. */
+  padding: calc(var(--space-16) - 1px) calc(var(--space-12) - 1px);
+}
+
+.card:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-ring-brand);
+}
+
+/* Checkbox badge — Figma check_circle. 24×24, pinned top-right. */
+.check {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--space-8);
+  width: 24px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
+}
+
+/*
+ * Flag slot — 32×24 tile. 1px border-primary, 4px radius per spec.
+ */
+.flag {
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/*
+ * "Other" uses a globe illustration — no rectangular frame around it.
+ */
+.flagNoBorder {
+  border: none;
+  background: transparent;
+}
+
+.flagImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.label {
+  color: var(--color-text-primary);
+  text-align: center;
+  white-space: nowrap;
+}

@@ -1,0 +1,53 @@
+/*
+ * TextField — matches the Figma "name input" card: ring/brand tint,
+ * 2px border brand, radius medium, 72px tall, 16 padding, icon + input.
+ */
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  height: 72px;
+  padding: var(--space-16);
+  border-radius: var(--radius-medium);
+  background: var(--color-ring-inverse);
+  border: 1px solid var(--color-border-primary);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+  width: 100%;
+}
+
+.field:focus-within,
+.fieldFocus {
+  border-width: 2px;
+  border-color: var(--color-border-brand);
+  background: var(--color-ring-brand);
+  padding: calc(var(--space-16) - 1px);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-xl);
+  color: var(--color-text-primary);
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" role="img" aria-label="Illustration placeholder">
+  <title>Illustration placeholder</title>
+  <desc>Replace this file to swap the asset on every info screen at once. The Figma asset at node 6053:69936 is a 22 kB SVG wrapper containing a base64 PNG; export it from Figma and drop it in at this path to replace this placeholder.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaefff"/>
+      <stop offset="1" stop-color="#d6dcfb"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="280" rx="20" fill="url(#bg)"/>
+  <g transform="translate(60 60)" fill="#5856d6" fill-opacity="0.85">
+    <circle cx="80" cy="80" r="72" fill="#ffffff" fill-opacity="0.55"/>
+    <path d="M80 36 l12 28 30 4 -22 20 6 30 -26 -14 -26 14 6 -30 -22 -20 30 -4z"/>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+.title {
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+}

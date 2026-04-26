@@ -1,0 +1,46 @@
+/*
+ * Progress bar — matches Figma progress bar component.
+ * 5 "knobs" (16×16 rounded squares) connected by 4 thin bars.
+ * Completed chapters: knob and connector fill with text-brand.
+ * Current chapter: knob full brand, connector partial-fill based on `chapterProgress`.
+ * Upcoming chapters: knob + connector use background-secondary.
+ */
+.progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.knob {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-xxs);
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-background-secondary);
+  flex-shrink: 0;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.knob.active,
+.knob.done {
+  background: var(--color-text-brand);
+  border-color: var(--color-background-brand);
+}
+
+.bar {
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 4px;
+  background: var(--color-background-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.barFill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--color-text-brand);
+  transition: width 250ms ease;
+}

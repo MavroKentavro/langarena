@@ -1,0 +1,89 @@
+/*
+ * Semantic typography classes — mirror Figma text styles.
+ * Prefer these classes over ad-hoc font declarations.
+ */
+
+.typo-display-large {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-4xl);
+  letter-spacing: -0.5px;
+}
+
+.typo-display {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
+  letter-spacing: 0;
+}
+
+.typo-heading-large {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  letter-spacing: 0.24px;
+}
+
+.typo-heading {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  letter-spacing: 0;
+}
+
+.typo-heading-small {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-xl);
+  letter-spacing: 0;
+}
+
+.typo-body-large {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-xl);
+  letter-spacing: 0;
+}
+
+.typo-body {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-lg);
+  letter-spacing: 0;
+}
+
+.typo-body-emphasized {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  letter-spacing: 0;
+}
+
+.typo-body-small {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.typo-body-small-emphasized {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.typo-caption {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+}

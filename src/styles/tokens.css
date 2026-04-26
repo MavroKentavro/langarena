@@ -1,0 +1,241 @@
+/*
+ * Design tokens — extracted directly from the Figma file
+ * (LA Subscription Funnel, Colors collection: Light/Dark modes).
+ *
+ * Light mode is the default. Dark mode values are declared on
+ * `[data-theme="dark"]` so a theme switch can be turned on later
+ * for A/B testing without changing component styles.
+ *
+ * Keep these tokens as the single source of truth. Components
+ * must reference `var(--color-...)` rather than hard-coding values.
+ */
+
+:root,
+[data-theme="light"] {
+  /* Background / Surface */
+  --color-background-canvas: #f9f9ff;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #eaefff;
+  --color-background-tertiary: #f1f2f3;
+  --color-background-ghost: #ffffff00;
+  --color-background-disabled: #00000033;
+  --color-background-inverse: #292b33;
+
+  /* Background / Accent */
+  --color-background-brand: #5856d6;
+  --color-background-info: #007aff;
+  --color-background-danger: #ff3b30;
+  --color-background-success: #34c759;
+  --color-background-warning: #ffcc00;
+
+  /* Background / Category */
+  --color-background-pink: #ff2da4;
+  --color-background-cyan: #32ade6;
+  --color-background-orange: #ffae00;
+  --color-background-mint: #00c78f;
+
+  /* Text / Surface */
+  --color-text-primary: #393c46;
+  --color-text-secondary: #8695aa;
+  --color-text-tertiary: #8695aa99;
+  --color-text-inverse: #23272e;
+  --color-text-ghost: #73726c80;
+  --color-text-disabled: #14141380;
+
+  /* Text / Accent */
+  --color-text-brand: #5856d6;
+  --color-text-on-accent: #ffffff;
+  --color-text-info: #0264f7;
+  --color-text-danger: #d70015;
+  --color-text-success: #248a3d;
+  --color-text-warning: #c45500;
+
+  /* Text / Category */
+  --color-text-pink: #ff2d8f;
+  --color-text-cyan: #00a5ef;
+  --color-text-orange: #ff9500;
+  --color-text-mint: #29af4a;
+
+  /* Border / Surface */
+  --color-border-primary: #dde4f9;
+  --color-border-secondary: #8695aa;
+  --color-border-tertiary: #eef0f2;
+  --color-border-inverse: #292b33;
+  --color-border-disabled: #1f1e1d1a;
+
+  /* Border / Accent */
+  --color-border-brand: #5856d6;
+  --color-border-info: #007aff;
+  --color-border-danger: #ff3b30;
+  --color-border-warning: #ffcc00;
+  --color-border-success: #34c759;
+
+  /* Border / Category */
+  --color-border-pink: #ff2da4;
+  --color-border-cyan: #32ade6;
+  --color-border-orange: #ffae00;
+  --color-border-mint: #00c78f;
+
+  /* Ring / Surface */
+  --color-ring-primary: #3a435226;
+  --color-ring-secondary: #434e610d;
+  --color-ring-inverse: #ffffff;
+
+  /* Ring / Accent */
+  --color-ring-brand: #5856d61a; /* ~10% — matches Figma "Ring/brand" usage */
+  --color-ring-info: #007aff33;
+  --color-ring-danger: #ff3b3033;
+  --color-ring-warning: #ffcc0033;
+  --color-ring-success: #34c75933;
+
+  /* Ring / Category */
+  --color-ring-pink: #ff47a033;
+  --color-ring-cyan: #32ade633;
+  --color-ring-mint: #00c78f33;
+  --color-ring-orange: #ffae0033;
+
+  /* Elevations — two-layer drop shadow per Figma elevation styles */
+  --elevation-100:
+    0 1px 2px 0 #171e281f,
+    0 2px 6px 0 #171e2812;
+  --elevation-200:
+    0 2px 4px 0 #171e281f,
+    0 6px 16px 0 #171e2814;
+  --elevation-300:
+    0 3px 6px 0 #171e2824,
+    0 10px 24px 0 #171e2817;
+  --elevation-400:
+    0 4px 10px 0 #171e2824,
+    0 16px 32px 0 #171e281a;
+  --elevation-500:
+    0 6px 14px 0 #171e2826,
+    0 24px 48px 0 #171e281c;
+}
+
+[data-theme="dark"] {
+  /* Background / Surface */
+  --color-background-canvas: #1e1f28;
+  --color-background-primary: #292b33;
+  --color-background-secondary: #434e61;
+  --color-background-tertiary: #34353d;
+  --color-background-ghost: #ffffff00;
+  --color-background-disabled: #ffffff33;
+  --color-background-inverse: #fcfcfd;
+
+  /* Background / Accent */
+  --color-background-brand: #5e5ce6;
+  --color-background-info: #0a84ff;
+  --color-background-danger: #ff453a;
+  --color-background-success: #30d158;
+  --color-background-warning: #ffd60a;
+
+  /* Text / Surface */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #8695aa;
+  --color-text-tertiary: #8695aa99;
+  --color-text-inverse: #ffffff;
+  --color-text-ghost: #9c9a9280;
+  --color-text-disabled: #faf9f580;
+
+  /* Text / Accent */
+  --color-text-brand: #4f84ff;
+  --color-text-on-accent: #ffffff;
+  --color-text-info: #178aff;
+  --color-text-danger: #ff6961;
+  --color-text-success: #30db5b;
+  --color-text-warning: #ffd426;
+
+  /* Border / Surface */
+  --color-border-primary: #3b4555;
+  --color-border-secondary: #8695aa;
+  --color-border-tertiary: #3d3e46;
+  --color-border-inverse: #fcfcfd;
+  --color-border-disabled: #dedcd11a;
+
+  /* Border / Accent */
+  --color-border-brand: #5e5ce6;
+  --color-border-info: #0a84ff;
+  --color-border-danger: #ff6961;
+  --color-border-warning: #ffd60a;
+  --color-border-success: #30d158;
+
+  /* Ring / Surface */
+  --color-ring-primary: #f6f7f926;
+  --color-ring-secondary: #eaefff0d;
+  --color-ring-inverse: #333c4b;
+
+  /* Ring / Accent (tuned for dark surfaces) */
+  --color-ring-brand: #5e5ce633;
+
+  /* Elevations in dark mode — same offsets, slightly deeper shadow colors */
+  --elevation-100:
+    0 1px 2px 0 #00000033,
+    0 2px 6px 0 #00000029;
+  --elevation-200:
+    0 2px 4px 0 #00000033,
+    0 6px 16px 0 #00000033;
+  --elevation-300:
+    0 3px 6px 0 #00000040,
+    0 10px 24px 0 #00000033;
+  --elevation-400:
+    0 4px 10px 0 #00000040,
+    0 16px 32px 0 #00000033;
+  --elevation-500:
+    0 6px 14px 0 #00000040,
+    0 24px 48px 0 #00000040;
+}
+
+:root {
+  /* Spacing — Figma Spacing collection */
+  --space-0: 0px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+
+  /* Radii — Figma Border collection */
+  --radius-xxs: 8px;
+  --radius-small: 16px;
+  --radius-medium: 20px;
+  --radius-large: 24px;
+  --radius-xl: 32px;
+
+  /* Typography */
+  --font-family-base:
+    "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Sizes */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+
+  /* Line heights */
+  --line-height-xs: 12px;
+  --line-height-sm: 14px;
+  --line-height-md: 16px;
+  --line-height-lg: 20px;
+  --line-height-xl: 24px;
+  --line-height-2xl: 32px;
+  --line-height-3xl: 40px;
+  --line-height-4xl: 48px;
+
+  /* Viewport — design was produced at iPhone 375x812 */
+  --screen-width: 375px;
+  --screen-height: 812px;
+}

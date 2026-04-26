@@ -1,0 +1,104 @@
+/*
+ * ScreenShell — shared scaffolding for every funnel screen:
+ *   - logo + progress bar header (sticky at top of the 375-wide viewport)
+ *   - scrollable content area
+ *   - fixed action container (white bg) at the bottom with the primary CTA
+ *
+ * Layout mirrors the Figma frame: bg canvas, flex column, 375×812,
+ * action container has bg primary and 24/16 padding.
+ */
+.shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+  background: var(--color-background-canvas);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-20);
+  padding: var(--space-24) var(--space-16) var(--space-16);
+  width: 100%;
+}
+
+.logo {
+  color: var(--color-text-primary);
+  height: 24px;
+  width: 129px;
+}
+
+.backButton {
+  position: absolute;
+  top: calc(var(--space-24) + 2px);
+  left: var(--space-16);
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  background: transparent;
+  transition: background-color 120ms ease;
+}
+
+.backButton:hover {
+  background: var(--color-background-tertiary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  padding: 0 var(--space-16);
+  /*
+   * Bottom padding reserves room for the fixed action container
+   * (56 CTA + 24 × 2 vertical padding ≈ 104) so the last element
+   * in the scroll never hides under the overlay.
+   */
+  padding-bottom: 128px;
+  flex: 1 0 auto;
+}
+
+/*
+ * Content column — fixed mobile layout at 343 (375 − 2×16 padding).
+ * This baseline applies to every screen; only the language-select
+ * screen opts into wider breakpoints from its own module CSS.
+ */
+.contentInner {
+  width: 100%;
+  max-width: 343px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+/*
+ * Action container — fixed bottom overlay.
+ * The white background stretches across the full browser width
+ * (left: 0; right: 0) while the CTA itself stays inside the 375
+ * baseline container (max-width 343, see Button.module.css).
+ * Sits above the content with z-index, and the content reserves
+ * `padding-bottom: 128` so its tail never hides under this zone.
+ */
+.actionContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: var(--color-background-primary);
+  padding: var(--space-24) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
