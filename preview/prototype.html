@@ -9052,7 +9052,11 @@
         </div>
       </div>
       <footer class="actionContainer">
-        <button class="cta" type="button" data-go="finalTouches">Next</button>
+        <!-- Initially disabled — JS toggles `disabled` + `aria-disabled`
+             in lockstep with email validity (see the auth-input wiring
+             in the script section).  The shared `.cta:disabled` rule
+             handles the muted visual state. -->
+        <button class="cta" type="button" data-go="finalTouches" disabled aria-disabled="true">Next</button>
       </footer>
     </section>
 
@@ -22128,6 +22132,31 @@
       if (authErrorEl) authErrorEl.hidden = true;
       if (authCardEl)  authCardEl.classList.remove("is-invalid");
     }
+    /*
+     * Toggle the on-screen Next CTA's enabled state in lockstep with
+     * email validity.  Empty / invalid → disabled, valid → enabled.
+     * Both the native `disabled` attribute and `aria-disabled` are
+     * synced so:
+     *   - the document-level [data-go] click delegation (which checks
+     *     both) refuses to navigate while disabled,
+     *   - assistive tech announces the state correctly,
+     *   - the existing `.cta:disabled` CSS rule applies the muted
+     *     visual state automatically.
+     *
+     * Called on every keystroke and once at boot, so the button is
+     * authoritative against whatever happens to be in the field at
+     * any moment (including pre-fills from autocomplete).
+     */
+    function syncNextEnabled() {
+      const valid = isValidEmail((authEmailInput.value || "").trim());
+      const btn = document.querySelector(
+        '.screen[data-screen="auth"] .actionContainer .cta'
+      );
+      if (!btn) return;
+      btn.disabled = !valid;
+      if (valid) btn.removeAttribute("aria-disabled");
+      else       btn.setAttribute("aria-disabled", "true");
+    }
 
     // Single source of truth for the submit decision.  Returns true
     // if navigation should proceed, false if validation failed (and
@@ -22175,10 +22204,17 @@
     }
 
     // (c) Hide error the moment the user starts editing again, so the
-    //     caption never lingers stale while the user is correcting.
+    //     caption never lingers stale while the user is correcting,
+    //     and re-evaluate the Next CTA's enabled state on every
+    //     keystroke (incl. paste, autocomplete, programmatic input).
     authEmailInput.addEventListener("input", () => {
       if (authErrorEl && !authErrorEl.hidden) clearError();
+      syncNextEnabled();
     });
+
+    // Initial state on boot — reflects whatever value the input
+    // already holds (typically empty → button disabled).
+    syncNextEnabled();
   }
 
   /* ─── How well do you know English? — tap-to-advance ───────── */

@@ -9,10 +9,62 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f9f9ff" />
     <title>LangArena — Get ready for TOEFL</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      ─── GitHub Pages entry-point ──────────────────────────────────
+      The real funnel is published at /docs/index.html (built by
+      scripts/build-docs.sh from preview/prototype.html). GitHub Pages
+      can be configured to serve either from `/docs` or from the repo
+      root; this file makes both modes land on the funnel.
+
+        - If Pages source = /docs   → /docs/index.html is served
+                                      directly. This file is unused.
+        - If Pages source = / (root) → this file loads first and
+                                      forward-redirects (HTTP-equiv
+                                      meta refresh + JS replace) to
+                                      ./docs/index.html.
+
+      The replace-style JS redirect (vs a vanilla href update) keeps
+      the back button sane: the user lands on the funnel and a single
+      Back returns them to wherever they came from, not to this empty
+      shim.
+
+      Earlier this file was the Vite + React scaffold from the start
+      of iteration 1 (`<script src="/src/main.tsx">`). That scaffold
+      is no longer the published funnel and is kept under /src for
+      future iteration 2 only.
+    -->
+    <meta http-equiv="refresh" content="0; url=./docs/index.html" />
+    <link rel="canonical" href="./docs/index.html" />
+
+    <style>
+      body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI",
+             Roboto, Helvetica, Arial, sans-serif; background: #f9f9ff;
+             color: #3a4352; }
+      .shim { min-height: 100vh; display: flex; align-items: center;
+              justify-content: center; padding: 24px; text-align: center; }
+      .shim a { color: #5856d6; text-decoration: underline;
+                text-underline-offset: 2px; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <noscript>
+      <div class="shim">
+        <p>Loading the LangArena prototype…
+          if your browser does not redirect automatically,
+          <a href="./docs/index.html">tap here</a>.</p>
+      </div>
+    </noscript>
+
+    <div class="shim">
+      <p>Loading the LangArena prototype…
+        <a href="./docs/index.html">open it directly</a>.</p>
+    </div>
+
+    <script>
+      // JS redirect — fires immediately, does NOT push a history entry,
+      // so Back goes to the previous site rather than back to this shim.
+      window.location.replace("./docs/index.html");
+    </script>
   </body>
 </html>

@@ -23,7 +23,11 @@ GitHub Action, nothing to install.
 
    * **Source**: `Deploy from a branch`
    * **Branch**: `main`
-   * **Folder**: `/docs`
+   * **Folder**: `/docs`  ← preferred, serves the funnel directly
+     OR
+   * **Folder**: `/ (root)` ← also works; the root `index.html` is a
+     redirect to `./docs/index.html` so visiting the site URL still
+     opens the funnel.
 
 5. Click **Save**. Within 30–60 seconds the prototype goes live at:
 
@@ -34,6 +38,22 @@ GitHub Action, nothing to install.
    GitHub will print the exact URL on the same Settings → Pages page.
 
 That URL is shareable — works on mobile, persistent, HTTPS by default.
+
+### Either Pages source works
+
+The repo is set up so both Pages source options route to the funnel:
+
+* **`/docs`** — `https://<user>.github.io/<repo>/` serves
+  `docs/index.html` directly. Cleaner URL (no extra hop). This is the
+  preferred mode.
+* **`/` (root)** — `https://<user>.github.io/<repo>/` first loads the
+  root `index.html`, which is a one-line meta-refresh + JS redirect
+  to `./docs/index.html`. The user lands on the funnel; the URL bar
+  ends with `/docs/index.html` rather than the bare repo URL, but the
+  experience is identical.
+
+Pick `/docs` if you want the cleaner URL; pick `/` if your repo has
+other stuff at root that should also be Pages-served.
 
 ## Updating the published prototype
 
