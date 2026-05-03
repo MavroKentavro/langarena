@@ -1718,6 +1718,7 @@
     color: var(--color-text-primary);
     white-space: nowrap;
   }
+<<<<<<< HEAD
 
   /*
    * Text-block reveal — `wordSectionComplete` and `grammarTestComplete`.
@@ -1787,6 +1788,8 @@
       opacity: 1;
     }
   }
+=======
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
   .screen.wsc .wsc-partial {
     --partial-width: 34px;
     --partial-from: 34px;
@@ -4980,6 +4983,7 @@
     background: color-mix(in srgb, var(--color-text-brand) 25%, transparent);
     border-color: var(--color-text-brand);
   }
+<<<<<<< HEAD
   /*
    * Final-stage Next button (`dialogues` screen) — primary CTA
    * style.  When the button flips out of the disabled state at
@@ -5009,6 +5013,8 @@
     transform: scale(var(--press-scale-cta));
   }
 
+=======
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
   /* Disabled variant — Figma 6272:5957. Loading screens render the
      action overlay so the layout matches the question screens, but
      buttons are visually muted and not interactive. */
@@ -5423,6 +5429,7 @@
    * Slider / How-LangArena-Works marquees: position:relative;
    * left:50%; margin-left:-50vw; width:100vw to escape the
    * 375-wide content column and span the entire viewport. */
+<<<<<<< HEAD
   /*
    * NOTE on top spacing — the previous version had `padding: 16 16
    * 128`, which (combined with `.ratings__title { margin-top: 16 }`)
@@ -5439,11 +5446,18 @@
     width: 100%;
     flex: 1 0 auto;
     padding: 0 16px 128px;
+=======
+  .ratings {
+    width: 100%;
+    flex: 1 0 auto;
+    padding: 16px 16px 128px;
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+<<<<<<< HEAD
   /*
    * Ratings flag marquee — canonical 2-group infinite marquee
    * pattern shared with the Trusted-by `.uniSlider` and review
@@ -5540,6 +5554,36 @@
     width: 32px;
     height: 24px;
     margin-right: 20px;
+=======
+  .ratings__flagsRibbon {
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    width: 100vw;
+    max-width: 100vw;
+    margin-top: 16px;
+  }
+  .ratings__flagsViewport {
+    overflow: hidden;
+    width: 100%;
+    /* Soft fade on the left/right edges so flags don't feel
+       sharply clipped at the viewport boundary. */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .ratings__flagsTrack {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: max-content;
+    animation: ratings-flags 30s linear infinite;
+    will-change: transform;
+  }
+  .ratings__flagsTrack:hover { animation-play-state: paused; }
+  .ratings__flagItem {
+    width: 32px;
+    height: 24px;
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     flex-shrink: 0;
     border-radius: 4px;
     border: 1px solid var(--color-border-primary);
@@ -5547,12 +5591,17 @@
     background: var(--color-background-primary);
     display: block;
   }
+<<<<<<< HEAD
   .ratingsMarquee__flag img {
+=======
+  .ratings__flagItem img {
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
+<<<<<<< HEAD
   @keyframes ratingsMarquee-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -5566,6 +5615,18 @@
        the screen transition).  Marquee below stays glued to this
        title via its own `margin-top: 16 px`. */
     margin: 0;
+=======
+  @keyframes ratings-flags {
+    /* Loop is exactly one of the 4 identical sets — 25 %. */
+    from { transform: translateX(0); }
+    to   { transform: translateX(-25%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ratings__flagsTrack { animation: none; }
+  }
+  .ratings__title {
+    margin: 16px 0 0;
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     font-weight: 700;
     font-size: 24px;
     line-height: 32px;
@@ -5579,12 +5640,15 @@
      column has a fixed width so olive branches stay aligned across
      rows regardless of label length. */
   .ratings__stats {
+<<<<<<< HEAD
     /* 24 px below the marquee — pulls the olive-wreath stack up the
        screen so the trailing `Based on average ratings…` disclaimer
        is no longer hidden behind the fixed action bar on shorter
        devices.  Earlier this was 56 px (compensating an upper-block
        lift) which on 812-px-tall mobile frames pushed the disclaimer
        into the action-overlay zone. */
+=======
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     margin-top: 24px;
     display: flex;
     flex-direction: column;
@@ -6491,6 +6555,7 @@
     height: 100% !important;
     display: block;
   }
+<<<<<<< HEAD
   /* "You've unlocked" + "50% off" — sits 12 px below the image
      visual.  Stacks on top of `.offerBody`'s 20-px flex `gap`, so
      the rendered distance from the visual block's bottom edge to
@@ -6498,6 +6563,13 @@
      If you need a different effective gap, adjust margin-top here. */
   .offerUnlock {
     margin-top: 12px;
+=======
+  /* "You've unlocked" + "50% off" — Figma sets a 46-px gap above
+     this group; we give the visual block its own bottom margin so
+     the column gap doesn't compound. */
+  .offerUnlock {
+    margin-top: 26px;            /* visual 250 + 26 + this block ≈ Figma 46 gap above pct */
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     width: 343px;
     max-width: 100%;
     text-align: center;
@@ -6952,6 +7024,7 @@
       <div class="ratings">
         
         <h1 class="ratings__title" data-i18n="web.ratings.countries">140+ countries</h1>
+<<<<<<< HEAD
         <!--
           Ratings flag marquee. Canonical 2-group infinite marquee:
             - full-width wrapper (`.ratingsMarquee`)
@@ -7013,6 +7086,96 @@
             </div>
           </div>
         </section>
+=======
+        <!-- Full-width flag ribbon — same break-out trick as the
+             University Slider / How-LangArena-Works marquees. -->
+        <div class="ratings__flagsRibbon" aria-hidden="true">
+          <div class="ratings__flagsViewport">
+            <div class="ratings__flagsTrack">
+              <!-- Set 1 -->
+              <span class="ratings__flagItem"><img src="flags/Japanese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Turkish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/French.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Chinese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Finnish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Czech.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Bulgarian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Greek.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Spanish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Russian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/German.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Italian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Indonesian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Portuguese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/English.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Korean.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Polish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Swedish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Ukrainian.svg" alt="" /></span>
+              <!-- Set 2 (duplicate) -->
+              <span class="ratings__flagItem"><img src="flags/Japanese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Turkish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/French.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Chinese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Finnish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Czech.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Bulgarian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Greek.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Spanish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Russian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/German.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Italian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Indonesian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Portuguese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/English.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Korean.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Polish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Swedish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Ukrainian.svg" alt="" /></span>
+              <!-- Set 3 (duplicate) -->
+              <span class="ratings__flagItem"><img src="flags/Japanese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Turkish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/French.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Chinese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Finnish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Czech.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Bulgarian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Greek.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Spanish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Russian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/German.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Italian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Indonesian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Portuguese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/English.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Korean.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Polish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Swedish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Ukrainian.svg" alt="" /></span>
+              <!-- Set 4 (duplicate) -->
+              <span class="ratings__flagItem"><img src="flags/Japanese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Turkish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/French.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Chinese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Finnish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Czech.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Bulgarian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Greek.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Spanish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Russian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/German.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Italian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Indonesian.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Portuguese.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/English.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Korean.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Polish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Swedish.svg" alt="" /></span>
+              <span class="ratings__flagItem"><img src="flags/Ukrainian.svg" alt="" /></span>
+            </div>
+          </div>
+        </div>
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
         <!--
           Three stacked olive-branch stat blocks per Figma 6488:7793.
           All three render statically (no typewriter cycle anymore —
@@ -7140,9 +7303,13 @@
 
           <!-- Skip on the Name screen advances the user to didYouKnow,
                same destination as Next — "skip" here means "skip
+<<<<<<< HEAD
                entering my name", not "go back to the start".  Default
                `.skip { margin-top: auto }` floats it down toward the
                fixed Next CTA, mirroring Figma's justify-between. -->
+=======
+               entering my name", not "go back to the start". -->
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
           <button class="skip" type="button" data-go="didYouKnow" data-i18n="common.skip">Skip</button>
         </div>
       </div>
@@ -8954,6 +9121,7 @@
       <h1 class="personaTitle" data-i18n="screen.dialogues.title">Creating real-life dialogues</h1>
       <div class="personaMedia">
         <img class="personaMedia__img" src="images/Dialogues.webp" alt="" />      </div>
+<<<<<<< HEAD
       <!--
         Single full-width Next button.  Starts in DISABLED state
         (matches `personaCta--disabled` + native `disabled` attr),
@@ -8970,6 +9138,12 @@
       <footer class="personaActions">
         <div class="personaActions__row">
           <button class="personaCta personaCta--disabled" type="button" disabled aria-disabled="true" data-go="auth" data-i18n="common.next">Next</button>
+=======
+      <footer class="personaActions" aria-hidden="true">
+        <div class="personaActions__row">
+          <button class="personaCta personaCta--disabled" type="button" disabled tabindex="-1" data-i18n="web.no">No</button>
+          <button class="personaCta personaCta--disabled" type="button" disabled tabindex="-1" data-i18n="web.yes">Yes</button>
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
         </div>
       </footer>
     </section>
@@ -14276,6 +14450,7 @@
       "screen.qIRead.title": "Я читаю и пишу лучше, чем говорю",
       "screen.qCannotRemember.title": "Иногда я не могу вспомнить слова, которые уже учил",
       "screen.qSoundNatural.title": "Я хочу говорить более естественно",
+<<<<<<< HEAD
       "screen.qNoProgress.title": "Иногда мне кажется, что я не двигаюсь вперёд, хотя стараюсь",
       "screen.auth.title.before": "Ваш план ",
       "screen.auth.title.after": " готов",
@@ -14297,6 +14472,9 @@
       "screen.finalTouches.msg.9.lead": "Уверенность на экзамене. ",
       "screen.finalTouches.msg.9.text": "Проверенные стратегии: сохранять спокойствие под давлением времени, справляться с незнакомыми темами и быстро возвращаться в колею. Освойте полезные переходы и спасательные фразы, чтобы не зависнуть на самом тесте.",
       "screen.finalTouches.msg.10.text": "Дальше разобьём вашу программу на 60-минутные ежедневные блоки практики!"
+=======
+      "screen.qNoProgress.title": "Иногда мне кажется, что я не двигаюсь вперёд, хотя стараюсь"
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     },
     "it": {
       "web.tutor": "Ripetitore",
@@ -17649,6 +17827,7 @@
       "screen.qIRead.title": "I can read and write better than I can speak",
       "screen.qCannotRemember.title": "Sometimes I cannot remember words that I’ve learned before",
       "screen.qSoundNatural.title": "I want to sound more natural when I speak",
+<<<<<<< HEAD
       "screen.qNoProgress.title": "Sometimes I feel like I don’t make progress, even though I try",
       "screen.auth.title.before": "Your plan ",
       "screen.auth.title.after": " is ready",
@@ -17670,6 +17849,9 @@
       "screen.finalTouches.msg.9.lead": "Confidence Booster. ",
       "screen.finalTouches.msg.9.text": "Get proven strategies to stay calm under time pressure, handle unfamiliar topics, and recover quickly when stuck. Master useful transitions and rescue phrases so you never freeze during the actual test.",
       "screen.finalTouches.msg.10.text": "Next, we’ll break your program into 60-minute daily practice sets!"
+=======
+      "screen.qNoProgress.title": "Sometimes I feel like I don’t make progress, even though I try"
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     },
     "fi": {
       "web.tutor": "Yksityisopettaja",
@@ -21847,6 +22029,23 @@
       }
     }
 
+    // ─── URL sync (hash-based routing) ─────────────────────────
+    // pushState / replaceState don't fire `hashchange`, so this
+    // is safe to run unconditionally — no risk of an infinite
+    // loop with our hashchange listener (defined below).
+    if (!opts.skipHash) {
+      const targetHash = "#" + step;
+      if (location.hash !== targetHash) {
+        try {
+          if (opts.replace) {
+            history.replaceState(null, "", targetHash);
+          } else {
+            history.pushState(null, "", targetHash);
+          }
+        } catch (_) { /* file://, sandboxed iframe — silently skip */ }
+      }
+    }
+
     if (step === "welcome") resetChartAndAnimate();
 
     // Replay the +N% count-up every time the user lands on the
@@ -23621,6 +23820,7 @@
     const reduced = window.matchMedia &&
                     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+<<<<<<< HEAD
     /*
      * Each message is described as a pair of i18n keys (text +
      * optional lead).  The actual strings come from staticText.t()
@@ -23656,6 +23856,20 @@
       });
     }
     var MESSAGES = buildMessages();
+=======
+    const MESSAGES = [
+      { text: "Based on your responses you are a beginner level English learner." },
+      { text: "Right now, speaking feels easier than understanding others and you sometimes wish you could learn English faster." },
+      { text: "Let’s build a personalized test preparation plan focused on:" },
+      { lead: "Daily Speaking Practice. ", text: "Guided practice for all TOEFL speaking tasks — independent and integrated — with prompts on topics including career, food, and travel. Speak with AI that simulates the exam setting and get feedback to build fluency." },
+      { lead: "Pronunciation Mastery. ",   text: "Sound-level analysis identifies your most challenging phonemes, while targeted drills help you improve. After each session, hear your progress toward the precise, natural pronunciation that TOEFL rewards." },
+      { lead: "Listening Exercises. ",     text: "Authentic academic lectures and campus conversations with native speakers on subjects like science, history, psychology, and art. Train to catch main ideas, details, inferences, and idiomatic expressions like those you will encounter on test day." },
+      { lead: "Vocabulary Booster. ",      text: "Learn level-perfect words in context, then lock them in with spaced repetition so you can recall them in reading, listening, and speaking tasks." },
+      { lead: "Grammar Improvement – next milestone A2. ", text: "Bite-size lessons cover topics essential for TOEFL writing and speaking sections – without the boredom of traditional textbooks." },
+      { lead: "Confidence Booster. ",      text: "Get proven strategies to stay calm under time pressure, handle unfamiliar topics, and recover quickly when stuck. Master useful transitions and rescue phrases so you never freeze during the actual test." },
+      { text: "Next, we’ll break your program into 60-minute daily practice sets!" },
+    ];
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
 
     let timers = [];
     let active = false;
@@ -23744,10 +23958,13 @@
     function start() {
       if (active) return;
       active = true;
+<<<<<<< HEAD
       // Re-resolve MESSAGES on every entry so a language switch
       // (made on welcome / language card) is reflected in the chat
       // strings the next time the user lands here.
       MESSAGES = buildMessages();
+=======
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
       clearTimers();
       chat.innerHTML = "";
       timers.push(setTimeout(() => { if (active) showMessage(0); }, 250));
@@ -24018,6 +24235,7 @@
 
   /*
    * ─── Theme switch ──────────────────────────────────────────
+<<<<<<< HEAD
    * Theme policy — current iteration:
    *   - Default theme is hard-locked to LIGHT.
    *   - System `prefers-color-scheme: dark` is INTENTIONALLY ignored:
@@ -24034,6 +24252,14 @@
    *
    * Each button carries `data-theme-pick="dark|light"`; the click
    * handlers remain wired for whenever a picker re-appears.
+=======
+   * Drives the segmented Dark / Light control on the welcome
+   * screen (Figma 6252:4676). Reads the stored preference on load
+   * and applies it to <html data-theme="...">; falls back to system
+   * `prefers-color-scheme` on the first visit and then locks in
+   * whatever the user picks. Each button carries
+   * `data-theme-pick="dark|light"`.
+>>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
    */
   (function wireTheme() {
     const root = document.documentElement;
