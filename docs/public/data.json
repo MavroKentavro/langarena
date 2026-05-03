@@ -3874,7 +3874,6 @@
       "screen.qIRead.title": "Я читаю и пишу лучше, чем говорю",
       "screen.qCannotRemember.title": "Иногда я не могу вспомнить слова, которые уже учил",
       "screen.qSoundNatural.title": "Я хочу говорить более естественно",
-<<<<<<< HEAD
       "screen.qNoProgress.title": "Иногда мне кажется, что я не двигаюсь вперёд, хотя стараюсь",
       "screen.auth.title.before": "Ваш план ",
       "screen.auth.title.after": " готов",
@@ -3896,9 +3895,6 @@
       "screen.finalTouches.msg.9.lead": "Уверенность на экзамене. ",
       "screen.finalTouches.msg.9.text": "Проверенные стратегии: сохранять спокойствие под давлением времени, справляться с незнакомыми темами и быстро возвращаться в колею. Освойте полезные переходы и спасательные фразы, чтобы не зависнуть на самом тесте.",
       "screen.finalTouches.msg.10.text": "Дальше разобьём вашу программу на 60-минутные ежедневные блоки практики!"
-=======
-      "screen.qNoProgress.title": "Иногда мне кажется, что я не двигаюсь вперёд, хотя стараюсь"
->>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     },
     "it": {
       "web.tutor": "Ripetitore",
@@ -7251,7 +7247,6 @@
       "screen.qIRead.title": "I can read and write better than I can speak",
       "screen.qCannotRemember.title": "Sometimes I cannot remember words that I’ve learned before",
       "screen.qSoundNatural.title": "I want to sound more natural when I speak",
-<<<<<<< HEAD
       "screen.qNoProgress.title": "Sometimes I feel like I don’t make progress, even though I try",
       "screen.auth.title.before": "Your plan ",
       "screen.auth.title.after": " is ready",
@@ -7273,9 +7268,6 @@
       "screen.finalTouches.msg.9.lead": "Confidence Booster. ",
       "screen.finalTouches.msg.9.text": "Get proven strategies to stay calm under time pressure, handle unfamiliar topics, and recover quickly when stuck. Master useful transitions and rescue phrases so you never freeze during the actual test.",
       "screen.finalTouches.msg.10.text": "Next, we’ll break your program into 60-minute daily practice sets!"
-=======
-      "screen.qNoProgress.title": "Sometimes I feel like I don’t make progress, even though I try"
->>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
     },
     "fi": {
       "web.tutor": "Yksityisopettaja",

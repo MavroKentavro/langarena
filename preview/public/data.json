@@ -3878,10 +3878,7 @@
       "screen.auth.title.before": "Ваш план ",
       "screen.auth.title.after": " готов",
       "screen.auth.email.placeholder": "Электронная почта",
-<<<<<<< HEAD
       "screen.auth.email.invalid": "Введите корректный e-mail (только латиница)",
-=======
->>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
       "screen.finalTouches.msg.1.text": "По вашим ответам у вас начальный уровень английского.",
       "screen.finalTouches.msg.2.text": "Сейчас говорить легче, чем понимать других, и иногда хочется учить английский быстрее.",
       "screen.finalTouches.msg.3.text": "Давайте составим персональный план подготовки к тесту с акцентом на:",
@@ -7254,10 +7251,7 @@
       "screen.auth.title.before": "Your plan ",
       "screen.auth.title.after": " is ready",
       "screen.auth.email.placeholder": "Email",
-<<<<<<< HEAD
       "screen.auth.email.invalid": "Please enter a valid email address",
-=======
->>>>>>> b51e5819fbe86acf83de1261bcc562060d08ec3c
       "screen.finalTouches.msg.1.text": "Based on your responses you are a beginner level English learner.",
       "screen.finalTouches.msg.2.text": "Right now, speaking feels easier than understanding others and you sometimes wish you could learn English faster.",
       "screen.finalTouches.msg.3.text": "Let’s build a personalized test preparation plan focused on:",
